@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var didUserEnterTextInTopField = false
     var didUserEnterTextInBottomField = false
+    var memedImage: UIImage!
     
     struct Meme {
         let topText: String
@@ -98,6 +99,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    @IBAction func share(sender: AnyObject) {
+        memedImage = generateMemedImage()
+        let viewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        presentViewController(viewController, animated: true, completion: nil)
+        viewController.completionWithItemsHandler = {
+            (s: String?, ok: Bool, items: [AnyObject]?, err:NSError?) -> Void in
+            self.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -107,6 +118,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
         }
+        shareButton.enabled = true
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -144,7 +156,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func save(){
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image!, memedImage: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image!, memedImage: memedImage)
     
     }
     
