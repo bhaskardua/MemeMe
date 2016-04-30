@@ -69,10 +69,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     func subscribeToKeyboardNotifications(){
-        print("start subscrbing")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
-        print("end subscrbing")
     }
     
     func unsubscribeToKeywordNotifications(){
@@ -140,9 +138,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillShow(notification: NSNotification!)
     {
-        print("start kb show")
         view.frame.origin.y -= getKeyboardHeight(notification)
-        print("stop kb show")
     }
     
     func keyboardWillHide(notification: NSNotification!){
