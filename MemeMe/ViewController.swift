@@ -110,6 +110,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        imageView.image = nil
+        viewDidLoad()
+    }
+    
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
