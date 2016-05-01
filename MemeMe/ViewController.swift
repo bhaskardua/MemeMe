@@ -17,9 +17,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    var didUserEnterTextInTopField = false
-    var didUserEnterTextInBottomField = false
+    var didUserEnterTextInTopField: Bool!
+    var didUserEnterTextInBottomField: Bool!
     var memedImage: UIImage!
     
     struct Meme {
@@ -50,6 +51,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.delegate = self
         
         shareButton.enabled = false
+        cancelButton.enabled = false
+        
+        didUserEnterTextInTopField = false
+        didUserEnterTextInBottomField = false
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -125,6 +130,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = image
         }
         shareButton.enabled = true
+        cancelButton.enabled = true
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -137,6 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             textField.text = ""
             didUserEnterTextInBottomField = true
         }
+        cancelButton.enabled = true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
