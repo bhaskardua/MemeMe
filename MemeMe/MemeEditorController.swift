@@ -41,14 +41,9 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = NSTextAlignment.Center
-        bottomTextField.textAlignment = NSTextAlignment.Center
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        
+        setupTextField(topTextField, defaultText: "TOP")
+        setupTextField(bottomTextField, defaultText: "BOTTOM")
         
         shareButton.enabled = false
         cancelButton.enabled = false
@@ -74,6 +69,13 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func setupTextField(textField: UITextField, defaultText: String) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.Center
+        textField.delegate = self
+        textField.text = defaultText
+    }
     
     func subscribeToKeyboardNotifications(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
