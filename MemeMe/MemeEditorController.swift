@@ -89,21 +89,18 @@ class MemeEditorController: UIViewController, UIImagePickerControllerDelegate, U
     
 
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
+        presetImagePicker(.SavedPhotosAlbum)
     }
     
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
-        
+        presetImagePicker(.Camera)
+    }
+    
+    func presetImagePicker(chosenSource: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePicker.sourceType = chosenSource
         presentViewController(imagePicker, animated: true, completion: nil)
-        
     }
     
     @IBAction func share(sender: AnyObject) {
